@@ -1,4 +1,5 @@
-﻿
+﻿@model IEnumerable<Emlak.Models.Ilan>
+
 @{
     ViewBag.Title = "Index";
 }
@@ -100,54 +101,40 @@
         </div>
 
         <!-- İlan Listesi -->
+        @foreach (var item in Model)
+        {
+            var c = 1;
 
-        <div class="col-sm-6 col-md-3">
-            <br />
-            <div class="thumbnail">
-                <img src="/Content/images/1.jpg" alt="..." style="height:300px;">
-                <div class="caption">
-                    <p><strong>İLAN DURUMU</strong>(TİP)</p>
-                    <p>Şehir - Semt</p>
-                    <p>
-                        <button class="btn" style="background-color:#ff0000; color:white;">Fiyat</button>
-                        <button class="btn btn-primary">Alan m<sup>2</sup></button>
-                        <button class="btn btn-success pull-right"><i class="fa fa-bed" aria-hidden="true"></i> Oda</button>
-                    </p>
+            <div class="col-sm-6 col-md-3">
+                <br />
+                <div class="thumbnail">
+                    @foreach (var rsm in ViewBag.imgs)
+                    {
+                        if (rsm.IlanId == item.IlanId)
+                        {
+                            if (@c == 1)
+                            {
+                              <a href="/Home/Detay/@item.IlanId"><img src="/Content/images/@rsm.ResimAd" alt="..." style="height:300px;"></a>  
+                                c++;
+                            }
+
+                        }
+                    }
+
+                    <div class="caption">
+                        <p><strong>@item.Tip.Durum.DurumAd</strong>(@item.Tip.TipAd)</p>
+                        <p>@item.Mahalle.Semt.Sehir.SehirAd - @item.Mahalle.Semt.SemtAd</p>
+                        <p>
+                            <button class="btn" style="background-color:#ff0000; color:white;">@item.Fiyat ₺</button>
+                            <button class="btn btn-primary">Alan @item.Alan m<sup>2</sup></button>
+                            <button class="btn btn-success pull-right"><i class="fa fa-bed" aria-hidden="true"></i> @item.OdaSayisi</button>
+                        </p>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
 
-        <div class="col-sm-6 col-md-3">
-            <br />
-            <div class="thumbnail">
-                <img src="/Content/images/2.jpg" alt="..." style="height:300px;">
-                <div class="caption">
-                    <p><strong>İLAN DURUMU</strong>(TİP)</p>
-                    <p>Şehir - Semt</p>
-                    <p>
-                        <button class="btn" style="background-color:#ff0000; color:white;">Fiyat</button>
-                        <button class="btn btn-primary">Alan m<sup>2</sup></button>
-                        <button class="btn btn-success pull-right"><i class="fa fa-bed" aria-hidden="true"></i> Oda</button>
-                    </p>
-                </div>
-            </div>
-        </div>
 
-        <div class="col-sm-6 col-md-3">
-            <br />
-            <div class="thumbnail">
-                <img src="/Content/images/3.jpg" alt="..." style="height:300px;">
-                <div class="caption">
-                    <p><strong>İLAN DURUMU</strong>(TİP)</p>
-                    <p>Şehir - Semt</p>
-                    <p>
-                        <button class="btn" style="background-color:#ff0000; color:white;">Fiyat</button>
-                        <button class="btn btn-primary">Alan m<sup>2</sup></button>
-                        <button class="btn btn-success pull-right"><i class="fa fa-bed" aria-hidden="true"></i> Oda</button>
-                    </p>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 
